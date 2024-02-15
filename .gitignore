@@ -6,3 +6,4 @@ reports/*
 data/camels_attributes_v2.0/
 *.tar.xz
 *.csv
+*.db
