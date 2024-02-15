@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from .datasets import CamelsTXT
+from datasets import CamelsTXT
 
 
 def create_h5_files(camels_root: PosixPath,

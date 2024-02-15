@@ -1,3 +1,8 @@
 reports/*
 *.pyc
 .vscode/*
+*.zip
+*.pdf
+data/camels_attributes_v2.0/
+*.tar.xz
+*.csv

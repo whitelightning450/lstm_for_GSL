@@ -66,10 +66,12 @@ def add_camels_attributes(camels_root: PosixPath, db_path: str = None):
         raise RuntimeError(f"Attribute folder not found at {attributes_path}")
 
     txt_files = attributes_path.glob('camels_*.txt')
+    
 
     # Read-in attributes into one big dataframe
     df = None
     for f in txt_files:
+        print(f)
         df_temp = pd.read_csv(f, sep=';', header=0, dtype={'gauge_id': str})
         df_temp = df_temp.set_index('gauge_id')
 
@@ -81,6 +83,9 @@ def add_camels_attributes(camels_root: PosixPath, db_path: str = None):
     # convert huc column to double digit strings
     df['huc'] = df['huc_02'].apply(lambda x: str(x).zfill(2))
     df = df.drop('huc_02', axis=1)
+
+    #drop duplicate columns
+    df = df.loc[:,~df.columns.duplicated()].copy()
 
     if db_path is None:
         db_path = str(Path(__file__).absolute().parent.parent / 'data' / 'attributes.db')
